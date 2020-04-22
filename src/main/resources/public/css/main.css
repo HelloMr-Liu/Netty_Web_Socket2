@@ -1,0 +1,141 @@
+.layui-layout-admin .layui-side {
+    top: 0px !important;
+    width: 220px;
+    z-index: 999999999;
+}
+
+.layui-breadcrumb a:hover {
+    color: #000000 !important;
+}
+
+.layui-side-scroll {
+    width: 100% !important;
+}
+
+.layui-layout-admin .layui-body {
+    bottom: 0px !important;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+.layui-nav-tree {
+    width: 100% !important;
+}
+
+.layui-nav-child dd a {
+    padding: 0px 45px !important;
+}
+
+
+
+/*===========定义顶部导航条对应的上下箭头样式==============*/
+.layui-header .layui-nav .layui-nav-child dd.layui-this a{
+    background-color: #fff !important; /*=====对应顶部个人信息移动上去的背景颜色默认是绿色 我们设置成白色====*/
+}
+.layui-header .layui-nav .layui-nav-more {
+    border-top-color: rgba(127, 141, 136, 0.7) !important;
+}
+.layui-header .layui-nav .layui-nav-mored, .layui-nav-itemed > a .layui-nav-more {
+    margin-top: -9px  !important;
+    border-style: dashed dashed solid  !important;
+    border-color: transparent transparent rgba(127, 141, 136, 0.7)  !important;
+}
+
+
+
+.layui-title {
+    background-color: #22242C !important;
+    height: 50px;
+    color: rgba(255, 255, 255, .8);
+    line-height: 50px;
+    text-align: center;
+    width: 100% !important;
+    box-shadow: 0px 20px 20px -20px #5E5E5E;
+}
+
+.nav-icon-class {
+    margin-right: 10px;
+}
+
+.nav-left {
+    float: left;
+}
+
+.nav-right {
+    float: right;
+}
+
+.layui-side-scroll {
+    background-color: #20222A !important;
+}
+
+.layui-layout-admin .layui-header .layui-nav {
+    background-color: #fff !important;
+    height: 50px;
+}
+
+.layui-layout-admin .layui-header .layui-nav li {
+    line-height: 50px;
+}
+
+.layui-layout-admin .layui-header .layui-nav li a {
+    color: black !important;
+}
+
+.layui-header {
+    height: 50px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
+    background-color: #fff !important;
+}
+
+.tl-icno {
+    font-size: 16px !important;
+}
+
+.body_content {
+    margin: 15px;
+    background-color: #fff;
+    min-height: 300px;
+    border-radius: 5px;
+}
+
+.layui-nav {
+    background-color: #20222A !important;
+}
+
+.layui-layout-admin .layui-body {
+    top: 50px !important;
+    padding-left: 20px;
+}
+
+.hide-title-class {
+    height: 50px;
+    line-height: 50px;
+    width: 220px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.body-tip-class {
+    height: 50px;
+    background-color: #fff;
+    border-top: 1px solid #FAFAFA;
+    line-height: 50px;
+    padding: 0px 10px;
+}
+
+.layui-nav .layui-this:after,
+.layui-header .layui-nav-bar,
+.layui-nav-tree .layui-nav-itemed:after {
+    position: absolute;
+    left: 20px;
+    top: 0 !important;
+    width: 0px;
+    height: 2px;
+    background-color: black;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+}

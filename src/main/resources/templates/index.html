@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title></title>
+    <style>
+    </style>
+
+    <!--  引入对应的 layui、element-ui、mian(自定义样式) 的css样式 -->
+    <link th:href="@{/css/layui.css}" rel="stylesheet">
+    <!-- <link th:href="@{/css/main.css}" rel="stylesheet">-->
+    <link th:href="@{/css/element-ui.css}" rel="stylesheet">
+</head>
+
+
+<body >
+    <!--<h3>WebSocket测试，在<span style="color:red">控制台</span>查看测试信息输出！</h3>-->
+    <!-- <h4>
+        [url=http://localhost:8090/zhengqi/WebSocket/sendOne?message=单发消息内容&id=none]单发消息链接[/url]
+        [url=http://localhost:8090/zhengqi/WebSocket/sendAll?message=群发消息内容]群发消息链接[/url]
+    </h4>-->
+
+
+   <!-- 创建一个栅格布局容器-->
+    <div class="layui-container">
+        <!--创建一行容器-->
+        <div class="layui-row" style="margin-bottom: 20px">
+            <div class="layui-col-md2">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="buildSocket()">点击我建立socket连接</button>
+            </div>
+        </div>
+        <!--创建一行容器-->
+        <div class="layui-row">
+            <form class="layui-form" action="#">
+                <div class="layui-col-md4">
+                    <div class="layui-form-item layui-form-text ">
+                        <label class="layui-form-label">普通文本域</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">单行输入框</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+
+<!-- 引入组件库 -->
+<script th:src="@{/js/jquery-1.9.1.min.js}"></script>
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/element-ui.js}"></script>
+<!--采用非模块化方式layUi js -->
+<script th:src="@{/layui.all.js}"></script>
+<!--<script th:src="@{/js/main.js}"></script>-->
+
+
+<script type="text/javascript">
+    var baseUrl="[[@{/}]]";
+    var socket;
+
+    //建立Web Socket连接
+    function  buildSocket() {
+        if (typeof (WebSocket) == "undefined") {
+            console.log("遗憾：您的浏览器不支持WebSocket");
+        } else {
+            //实现化WebSocket对象
+            //指定要连接的服务器地址与端口建立连接
+            //ws对应http、wss对应https。
+            //socket = new WebSocket("ws://localhost:8090"+baseUrl+"myWebSocket/test");
+            socket = new WebSocket("ws://localhost:7777/myWebSocket");
+
+            //连接打开事件
+            socket.onopen = function() {
+                console.log("Socket 已打开");
+                //ssocket.send("我是前端页面发送过来的请求");
+                layer.msg('恭喜：您的浏览器支持WebSocket',{type: 1,shade: 0.4,time:1000})
+            };
+
+            //当后端对指定的session进行了消息推送就会执行当前onmessage方法，会将推送的信息给接受
+            socket.onmessage = function(msg) {
+                layer.open({
+                    type: 1,
+                    area: ['600px', '360px'],
+                    shadeClose: true, //点击遮罩关闭
+                    content: '\<\div style="padding:20px;">'+msg.data+'\<\/div>'
+                });
+            };
+
+            //连接关闭事件
+            socket.onclose = function() {
+                console.log("Socket已关闭");
+            };
+            //发生了错误事件
+            socket.onerror = function() {
+                alert("Socket发生了错误");
+            }
+
+            //窗口关闭时，关闭连接
+            window.unload=function() {
+                socket.close();
+            };
+        }
+    }
+
+</script>
+
+</html>
